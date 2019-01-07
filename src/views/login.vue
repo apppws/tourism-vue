@@ -5,13 +5,11 @@
       <span>去旅行</span>
     </header>
     <section class="logon-box">
-      <input type="text" placeholder="手机号">
-      <input type="password" placeholder="密码">
+      <input type="text" v-model="username" placeholder="手机号/用户名">
+      <input type="password" v-model="password" placeholder="密码">
       <a href class="forget">忘记密码？</a>
       <div class="btn-box">
-        <a href="index.html">
-          <button>登录</button>
-        </a>
+          <button @click="doLogin">登录</button>
       </div>
       <div class="register-box">没有账号？
         <router-link to="register">去注册</router-link>
@@ -34,3 +32,44 @@
     </section>
   </div>
 </template>
+<script>
+import { Dialog, Toast } from "we-vue";
+export default {
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    doLogin() {
+      this.axios
+        .post(
+          "https://easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/logins",
+          {
+            username: this.username,
+            password: this.password
+          }
+        )
+        .then(res => {
+          // console.log(res);
+          //    判断是否登录成功
+          if (res.data.errno == 0) {
+            localStorage.setItem("token", res.data.token);
+            Dialog({
+              message: "注册成功",
+              skin: "android"
+            }).then(res => {
+              this.$router.push("/");
+            });
+          } else {
+            Toast.fail({
+              duration: 1000,
+              message: "注册账号或者密码不正确"
+            });
+          }
+        });
+    }
+  }
+};
+</script>
