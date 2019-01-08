@@ -95,7 +95,7 @@
           </a>
         </div>
         <div class="raider-box">
-          <router-link to="guide">
+          <router-link to="tourlist">
             <div class="raider-sub" v-for="(v,k) in tourblogs" :key="k">
               <div class="raider-left">
                 <div class="raider-title">{{ v.title }}</div>

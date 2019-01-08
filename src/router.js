@@ -50,6 +50,12 @@ export default new Router({
       name:'register',
       component:() => import('./views/register.vue'),
     },
+    // 搜索页面
+    {
+      path:'/seach',
+      name:'/seach',
+      component:() =>import('./views/seach.vue'),
+    },
     // 注册协议
     {
       path:'/userAgreement',
@@ -67,6 +73,12 @@ export default new Router({
       path:'/guide',
       name:'guide',
       component:() =>import('./views/guide.vue'),
+    },
+    // 游记日志详情页
+    {
+      path:'/tourlist',
+      name:'tourlist',
+      component:() =>import('./views/tourlist.vue'),
     },
     // 导游信息
     {
