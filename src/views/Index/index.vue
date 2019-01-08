@@ -25,23 +25,18 @@
       <section class="index-choiceProduct">
         <h2 class="index-choiceProduct-title">精选折扣 每日更新</h2>
         <ul class="index-choiceProduct-list">
-          <li>
+          <li v-for="(v,k) in tourlist" :key="k">
             <router-link to="/source">
               <div class="pic">
-                <img
-                  width="100%"
-                  data-src="../../assets/img/lv1.jpg"
-                  src="../../assets/img/lv1.jpg"
-                  lazy="loaded"
-                >
+                <img width="100%" :data-src="v.logo" :src="v.logo" lazy="loaded">
               </div>
-              <h3>[圣诞][元旦][春节]上海/南京/杭州直飞东京/大阪/名古屋/冲绳/札幌/福冈2-30天往返含税机票</h3>
+              <h3>{{v.list_name}}</h3>
               <p class="price">
-                <em>3499</em>元起
+                <em>{{ v.price }}</em>元起
               </p>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/source">
               <div class="pic">
                 <img
@@ -88,7 +83,7 @@
                 <em>3799</em>元起
               </p>
             </router-link>
-          </li>
+          </li>-->
         </ul>
       </section>
       <!-- 推荐 E -->
@@ -100,7 +95,32 @@
           </a>
         </div>
         <div class="raider-box">
-          <a href="guide.html">
+          <router-link to="guide">
+            <div class="raider-sub" v-for="(v,k) in tourblogs" :key="k">
+              <div class="raider-left">
+                <div class="raider-title">{{ v.title }}</div>
+                <div class="raider-text">{{v.content}}</div>
+                <div class="raider-bottom">
+                  <span class="raider-bottom-sub">
+                    <img src="../../assets/img/index_like.png" alt>
+                    {{v.zan}}万
+                  </span>
+                  <span class="raider-bottom-sub">
+                    <img src="../../assets/img/index_dislike.png" alt>
+                    {{v.cai}}
+                  </span>
+                  <span class="raider-bottom-sub">
+                    <img src="../../assets/img/index_love.png" alt>
+                    {{v.shoucang}}
+                  </span>
+                </div>
+              </div>
+              <div class="raider-right">
+                <img :src="v.img" alt>
+              </div>
+            </div>
+          </router-link>
+          <!-- <a href="guide.html">
             <div class="raider-sub">
               <div class="raider-left">
                 <div class="raider-title">她们被称为“台湾的万青”，不到20岁她们被称为“台湾的万青”，不到20岁</div>
@@ -124,82 +144,7 @@
                 <img src="../../assets/img/guide_pic.png" alt>
               </div>
             </div>
-          </a>
-          <a href="guide.html">
-            <div class="raider-sub">
-              <div class="raider-left">
-                <div class="raider-title">她们被称为“台湾的万青”，不到20岁她们被称为“台湾的万青”，不到20岁</div>
-                <div class="raider-text">抓住一个地区的时候，这和涅槃的时候同样珍贵。</div>
-                <div class="raider-bottom">
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_like.png" alt>
-                    2.9万
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_dislike.png" alt>
-                    1200
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_love.png" alt>
-                    2200
-                  </span>
-                </div>
-              </div>
-              <div class="raider-right">
-                <img src="../../assets/img/guide_pic.png" alt>
-              </div>
-            </div>
-          </a>
-          <a href="guide.html">
-            <div class="raider-sub">
-              <div class="raider-left">
-                <div class="raider-title">她们被称为“台湾的万青”，不到20岁她们被称为“台湾的万青”，不到20岁</div>
-                <div class="raider-text">抓住一个地区的时候，这和涅槃的时候同样珍贵。</div>
-                <div class="raider-bottom">
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_like.png" alt>
-                    2.9万
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_dislike.png" alt>
-                    1200
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_love.png" alt>
-                    2200
-                  </span>
-                </div>
-              </div>
-              <div class="raider-right">
-                <img src="../../assets/img/guide_pic.png" alt>
-              </div>
-            </div>
-          </a>
-          <a href="guide.html">
-            <div class="raider-sub">
-              <div class="raider-left">
-                <div class="raider-title">她们被称为“台湾的万青”，不到20岁她们被称为“台湾的万青”，不到20岁</div>
-                <div class="raider-text">抓住一个地区的时候，这和涅槃的时候同样珍贵。</div>
-                <div class="raider-bottom">
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_like.png" alt>
-                    2.9万
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_dislike.png" alt>
-                    1200
-                  </span>
-                  <span class="raider-bottom-sub">
-                    <img src="../../assets/img/index_love.png" alt>
-                    2200
-                  </span>
-                </div>
-              </div>
-              <div class="raider-right">
-                <img src="../../assets/img/guide_pic.png" alt>
-              </div>
-            </div>
-          </a>
+          </a> -->
 
           <wv-loadmore></wv-loadmore>
           <wv-loadmore type="lineDot" text="loading"></wv-loadmore>
@@ -208,3 +153,55 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      // 推荐数据
+      tourlist: {
+        logo: "",
+        price: "",
+        list_name: "",
+        category: {
+          logo: "",
+          title: "",
+          price: "",
+          traffic: "",
+          wangfeiji: "",
+          fanfeiji: "",
+          wang: "",
+          fan: "",
+          jiudian: "",
+          dizhi: "",
+          jdjieshao: ""
+        }
+      },
+      // 游记日志
+      tourblogs: {
+        title: "",
+        content:'',
+        zan: '',
+        shoucang: '',
+        img: ""
+      }
+    };
+  },
+  created() {
+    // 推荐
+    this.axios
+      .get(
+        "https://easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/tourlist",
+        this.tourlist
+      )
+      .then(res => {
+        this.tourlist = res.data.data;
+      });
+    // 游记日志
+    this.axios.get("https://easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/tourblogs",this.tourblogs)
+    .then((res)=>{
+      this.tourblogs = res.data.data;
+      // console.log(this.tourblogs);
+    })
+  }
+};
+</script>

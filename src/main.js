@@ -10,7 +10,8 @@ Vue.use(VueResource)
 Vue.use(WeVue)
 Vue.prototype.axios = axios
 Vue.config.productionTip = false
-
+// 引入mockjs
+require('./mock.js')
 new Vue({
   router,
   store,
