@@ -17,7 +17,7 @@
       </header>
       <!-- 搜索 S -->
       <section class="search-wrapper" data-v-0ae9634c>
-        <input id="search" type="text" placeholder="搜索目的地／游记攻略／问答">
+        <input id="search" type="search" v-model="search" @click="dosearch" placeholder="搜索目的地／游记攻略／问答" ref="input1">
         <!---->
       </section>
       <!-- 搜索 E -->
@@ -157,6 +157,8 @@
 export default {
   data() {
     return {
+      // 搜索
+      search:'',
       // 推荐数据
       tourlist: {
         logo: "",
@@ -183,7 +185,7 @@ export default {
         zan: '',
         shoucang: '',
         img: ""
-      }
+      },
     };
   },
   created() {
@@ -202,6 +204,14 @@ export default {
       this.tourblogs = res.data.data;
       // console.log(this.tourblogs);
     })
-  }
+  },
+  methods: {
+    dosearch(){
+        // 去掉左右空格
+        this.search = this.search.trim();
+        // 调转到搜索页面
+          this.$router.push('/seach');
+    }
+  },
 };
 </script>

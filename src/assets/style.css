@@ -1556,51 +1556,52 @@ ol, ul {
 /*搜索页*/
 
 .search-header {
-    padding: 0.3rem 0.2rem;
+    padding: 1.3rem 1.2rem;
     margin-bottom: 0.3rem;
-    font-size: 0.32rem;
+    font-size: 0.88rem;
     color: #474747;
 }
 
 .search-container {
     display: inline-block;
-    width: 6rem;
-    height: 0.5rem;
-    margin-right: 0.1rem;
-    padding-left: 0.16rem;
-    line-height: 0.5rem;
+    width: 18rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+    padding-left: 0.45rem;
+    line-height: 1.5rem;
     background: #f3f3f3;
+    border-radius: 10px;
 }
 
 .search-container img {
-    width: 0.28rem;
-    height: 0.28rem;
+    width: 0.88rem;
+    height: 0.88rem;
 }
 
 .search-container input {
-    width: 5.4rem;
+    width: 10.4rem;
     height: 100%;
-    padding-left: 0.1rem;
+    padding-left: 1rem;
     background: transparent;
-    font-size: 0.24rem;
+    font-size: 0.78rem;
     color: #474747;
 }
 
 .search-title {
-    width: 6.9rem;
+    width: 90%;
     margin: 0 auto 0.32rem;
-    font-size: 0.28rem;
+    font-size: 0.88rem;
     color: #494949;
 }
 
 .search-title img {
     float: right;
-    width: 0.36rem;
-    height: 0.36rem;
+    width: 0.88rem;
+    height: 0.88rem;
 }
 
 .search-wrap {
-    width: 6.5rem;
+    width: 90%;
     margin: 0 auto;
     padding-bottom: 0.2rem;
 }
@@ -1608,8 +1609,8 @@ ol, ul {
 .search-wrap span {
     display: inline-block;
     margin: 0 0.24rem 0.15rem 0;
-    padding: 0.23rem;
-    font-size: 0.28rem;
+    padding: 0.56rem;
+    font-size: 0.68rem;
     color: #474747;
     background: #f8f8f8;
     border-radius: 0.04rem;
