@@ -160,7 +160,7 @@ section {
     line-height: 52px;
     background-color: #10b2db;
     position: fixed;
-    width: 95%;
+    width: 100%;
     z-index: 999;
 }
 
@@ -184,7 +184,7 @@ section {
     position: relative;
     float: right;
     height: 100%;
-    right: 0.5rem;
+    right: 1rem;
 }
 
 .m-header a {
@@ -1496,9 +1496,9 @@ ol, ul {
     font-size: 0.9rem;
     color: #3e3e3e;
     line-height: 1.5rem;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 
