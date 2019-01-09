@@ -102,7 +102,7 @@
           </a>
         </div>
         <div class="raider-box">
-          <router-link to="tourlist">
+          <router-link :to="{path:'tourlist',query:{id:tourblogsId}}">
             <div
               class="raider-sub"
               v-for="(v,k) in tourblogs"
@@ -193,6 +193,13 @@ export default {
       },
       // 游记日志
       tourblogs: [],
+      tourblogsId:'',
+      tourblogsTitle:'',
+      tourblogsContent:'',
+      tourblogsZan:'',
+      tourblogsCai:'',
+      tourblogsSC:'',
+      tourblogsImg:'',
       listsearch: {
         page: 4,
         per_page: 3,
@@ -224,8 +231,18 @@ export default {
       )
       .then(res => {
         this.tourblogs = res.data.data;
-        // console.log(this.tourblogs);
+        // 设置 id
+        // for(let i = 0;i<Object.keys(this.tourblogs).length;i++){
+        //     this.tourblogsId = i+1
+        // }
+        for(let i = 0;i<this.tourblogs.length;i++){
+            this.tourblogsId = this.tourblogs[i].id
+            // console.log(this.tourblogs[i])
+        }
+        
       });
+     
+      
   },
   methods: {
     dosearch() {
@@ -245,7 +262,7 @@ export default {
           { params: this.listsearch }
         )
         .then(res => {
-          console.log(res.data.data)
+          // console.log(res.data.data)
           // 合并到原来数组
           this.tourblogs = this.tourblogs.concat(res.data.data);
           // 在判断这个数据有几条记录  
@@ -257,7 +274,7 @@ export default {
             // 已经到最后一页了
             this.islastPage = true;
           }
-        });
+        });                                                                                                                                                                                                                                                                                                                           
     }
   }
 };

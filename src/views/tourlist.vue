@@ -6,7 +6,7 @@
         <router-link to="/" class="page-return">
           <img src="../assets/img/return_white.png" alt class="return">
         </router-link>
-        <span class="page-name">迷人的兰州</span>
+        <span class="page-name">{{ list.title }}-{{list.id}}</span>
       </div>
       <div class="writer">
         <div class="writer-name">
@@ -23,15 +23,11 @@
     <div class="wrap">
       <section class="mb-10">
         <div class="guide-content-box">
-          <div
-            class="guide-content"
-          >我们这次住的是海景房（Ocean View Room），在携程上订的，2000左右一个晚上，不含早餐。预定的时候可以跟他们说自己有什么需求，我就写了想要高一点的楼层</div>
+          <div class="guide-content">{{ list.content }}</div>
           <div class="guide-content-pic">
-            <img src="../assets/img/guide_pic.png" alt>
+            <img :src="list.img" alt>
           </div>
-          <div
-            class="guide-content"
-          >我们这次住的是海景房（Ocean View Room），在携程上订的，2000左右一个晚上，不含早餐。预定的时候可以跟他们说自己有什么需求，我就写了想要高一点的楼层</div>
+          <div class="guide-content">{{ list.content }}</div>
         </div>
         <div class="guide-info-wrap container">
           <div class="guide-pic-sm">
@@ -57,36 +53,97 @@
             <input type="text" class="comment-input" placeholder="写评论">
           </div>
         </div>
-        <div class="comment-list">
+        <div class="comment-list" v-for="(v,k) in pinlun" :key="k">
           <div class="comment-sub">
             <div class="comment-sub-title">
               <div class="comment-pic" id="comment-pic">
-                <img src="../assets/img/avatar.jpg" alt>
+                <img :src="v.headImg" alt>
               </div>
               <div class="comment-info">
-                <div class="comment-name">飞奔的蜗牛</div>
-                <div class="comment-time">2018.01.01</div>
+                <div class="comment-name">{{ v.user }}</div>
+                <div class="comment-time">{{ v.created_at }}</div>
               </div>
             </div>
-            <div class="comment-content">好地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。晚上更漂亮的地方。</div>
+            <div class="comment-content">{{v.content }}</div>
           </div>
         </div>
-        <div class="comment-more">加载全部评论</div>
+        <div v-show="isShow" @click="All" class="comment-more">加载全部评论</div>
+        <div v-show="!isShow" @click="All" class="comment-more">已经加载最新的了</div>
         <div class="comment-state">
           <div class="comment-like">
             <img src="../assets/img/like.png" alt>
-            <span>2.9万</span>
+            <span>{{list.zan}}个</span>
           </div>
           <div class="comment-dislike">
             <img src="../assets/img/dislike.png" alt>
-            <span>1200</span>
+            <span>{{list.cai}}</span>
           </div>
           <div class="comment-love">
             <img src="../assets/img/love.png" alt>
-            <span>2200</span>
+            <span>{{list.shoucang}}</span>
           </div>
         </div>
       </section>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      ids: this.$route.query.id,
+      list: {
+        id: this.$route.query.id,
+        title: "",
+        content: "",
+        zan: "",
+        cai: "",
+        shoucang: "",
+        img: ""
+      },
+      pinlun: [],
+      isShow: true
+    };
+  },
+  // "https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/content?id="+this.ids
+  // 因是模拟数据  不能查找传id  如果有后端 传入上面id即可
+  created() {
+    // 列表
+    this.axios
+      .get(
+        "https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/content",
+        this.list
+      )
+      .then(res => {
+        this.list.title = res.data.data.title;
+        this.list.content = res.data.data.content;
+        this.list.zan = res.data.data.zan;
+        this.list.cai = res.data.data.cai;
+        this.list.shoucang = res.data.data.shoucang;
+        this.list.img = res.data.data.img;
+      });
+
+    // 评论
+    this.axios
+      .get(
+        "https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/pinlun",
+        this.pinlun
+      )
+      .then(res => {
+        this.pinlun = res.data.data;
+        // console.log(this.pinlun)
+      });
+  },
+  methods: {
+    // 获取最新数据
+    All() {
+      if (this.pinlun.length > 1) {
+        this.isShow = false;
+      }else{
+        this.isShow = true
+      }
+    }
+  }
+};
+</script>
+
