@@ -146,4 +146,17 @@ export default {
   }
 };
 </script>
+<style scoped>
+.page-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 2.95rem;
+    line-height: 2.95rem;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0, transparent);
+    border-bottom: 1px solid #f0ebeb;
+    z-index: 999;
+}
+</style>
+
 

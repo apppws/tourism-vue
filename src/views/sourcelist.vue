@@ -20,7 +20,7 @@
           </div>
         </div>
         <!-- 搜索 -->
-        <div class="zw-share sharebtn">
+        <div class="zw-share sharebtn" @click="search">
           <a data-bn-ipg="details-share-click" class="zw-share-button zw-share-button-white"></a>
           <div class="zw-share-mask" style="display:none;">
             <!-- 图片 -->
@@ -401,6 +401,11 @@ export default {
     // 查看更多的酒店
     showJd(){
        this.Jd = false;  
+    },
+    // 搜索
+    search(){
+       // 调转到搜索页面
+      this.$router.push("/seach");
     }
   },
   // 滚动的监听事件
