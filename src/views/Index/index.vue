@@ -33,7 +33,7 @@
         <h2 class="index-choiceProduct-title">精选折扣 每日更新</h2>
         <ul class="index-choiceProduct-list">
           <li v-for="(v,k) in tourlist" :key="k">
-            <router-link to="/source">
+            <router-link :to="{path:'source',query:{id:v.id}}">
               <div class="pic">
                 <img width="100%" :data-src="v.logo" :src="v.logo" lazy="loaded">
               </div>
@@ -173,33 +173,11 @@ export default {
       // 搜索
       search: "",
       // 推荐数据
-      tourlist: {
-        logo: "",
-        price: "",
-        list_name: "",
-        category: {
-          logo: "",
-          title: "",
-          price: "",
-          traffic: "",
-          wangfeiji: "",
-          fanfeiji: "",
-          wang: "",
-          fan: "",
-          jiudian: "",
-          dizhi: "",
-          jdjieshao: ""
-        }
-      },
+      tourlist: [],
+      tourlistId:'',
       // 游记日志
       tourblogs: [],
       tourblogsId:'',
-      tourblogsTitle:'',
-      tourblogsContent:'',
-      tourblogsZan:'',
-      tourblogsCai:'',
-      tourblogsSC:'',
-      tourblogsImg:'',
       listsearch: {
         page: 4,
         per_page: 3,
@@ -221,7 +199,7 @@ export default {
         this.tourlist
       )
       .then(res => {
-        this.tourlist = res.data.data;
+        this.tourlist = res.data.data;        
       });
     // 游记日志
     this.axios
@@ -232,12 +210,8 @@ export default {
       .then(res => {
         this.tourblogs = res.data.data;
         // 设置 id
-        // for(let i = 0;i<Object.keys(this.tourblogs).length;i++){
-        //     this.tourblogsId = i+1
-        // }
         for(let i = 0;i<this.tourblogs.length;i++){
             this.tourblogsId = this.tourblogs[i].id
-            // console.log(this.tourblogs[i])
         }
         
       });

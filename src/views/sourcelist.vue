@@ -30,21 +30,21 @@
             >
           </div>
         </div>
-        <p>产品编号&nbsp;82013</p>
+        <p>产品编号&nbsp;{{list.id}}</p>
       </div>
       <div id="toProduct"></div>
       <h1 id="product_title" class="tit">
-        <a name="product">[元旦]天津往返东京/大阪/名古屋/冲绳/札幌4-7天含税机票（天津航空/日本航空/两点进出）</a>
+        <a name="product">{{list.title}}</a>
       </h1>
       <div class="info">
         <div class="price">
-          <em>1499</em>元起
+          <em>{{list.price}}</em>元起
         </div>
         <div class="floorGuide">
           <a href="#this">底价指南</a>
         </div>
         <div class="sold">已售&nbsp;1260份</div>
-        <div class="browse">浏览&nbsp;7644145</div>
+        <div class="browse">浏览&nbsp;{{list.liulanNum}}</div>
         <!---->
       </div>
       <!-- 标题 E -->
@@ -130,20 +130,21 @@
                       <span class="direction">往</span>
                       <div class="titleBar">
                         <span class="date">DAY1</span>
-                        <span class="til">春秋航空9C8663</span>
+                        <span class="til">{{list.wangfeiji}}</span>
                       </div>
                       <!---->
                       <div class="timeBar">
                         <div class="left">
-                          <a href="javascript:void(0)" class="time">10:50</a>
-                          <span class="text">成都</span>
+                          <a href="javascript:void(0)" class="time">{{list.startDate}}</a>
+                          <span class="text">{{list.startDizhi}}</span>
                         </div>
                         <div class="right">
-                          <a href="javascript:void(0)" class="time">14:00
+                          <a href="javascript:void(0)" class="time">
+                            {{list.endDate}}
                             <!---->
                             <!---->
                           </a>
-                          <span class="text">甲米</span>
+                          <span class="text">{{list.endDizhi}}</span>
                         </div>
                         <div class="mid">
                           <i class="zwui-iconfont zworld-icon-traffic-line"></i>
@@ -156,90 +157,25 @@
                       <span class="direction">返</span>
                       <div class="titleBar">
                         <span class="date">DAY5/6</span>
-                        <span class="til">春秋航空9C8664</span>
+                        <span class="til">{{list.fanfeiji}}</span>
                       </div>
                       <!---->
                       <div class="timeBar">
                         <div class="left">
-                          <a href="javascript:void(0)" class="time">15:00</a>
-                          <span class="text">甲米</span>
+                          <a href="javascript:void(0)" class="time">{{list.startDate}}</a>
+                          <span class="text">{{list.startDizhi}}</span>
                         </div>
                         <div class="right">
-                          <a href="javascript:void(0)" class="time">19:45
+                          <a href="javascript:void(0)" class="time">
+                            {{list.endDate}}
                             <!---->
                             <!---->
                           </a>
-                          <span class="text">成都</span>
+                          <span class="text">{{list.endDizhi}}</span>
                         </div>
                         <div class="mid">
                           <i class="zwui-iconfont zworld-icon-traffic-line"></i>
                         </div>
-                        <div class="clear"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="padding-bottom: 1.5rem;">
-                  <div class="caseTitle">
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td class="left">
-                            <p>交通2</p>
-                          </td>
-                          <td class="right">
-                            <!---->
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="airTicketInfo">
-                    <div class="goInfo">
-                      <!---->
-                      <span class="direction">往</span>
-                      <div class="titleBar">
-                        <span class="date">DAY1</span>
-                        <span class="til">四川航空3U8079</span>
-                      </div>
-                      <!---->
-                      <div class="timeBar">
-                        <div class="left">
-                          <a href="javascript:void(0)" class="time">17:45</a>
-                          <span class="text">成都</span>
-                        </div>
-                        <div class="right">
-                          <a href="javascript:void(0)" class="time">21:00
-                            <!---->
-                            <!---->
-                          </a>
-                          <span class="text">甲米</span>
-                        </div>
-                        <div class="mid"></div>
-                        <div class="clear"></div>
-                      </div>
-                    </div>
-                    <div class="backInfo">
-                      <!---->
-                      <span class="direction">返</span>
-                      <div class="titleBar">
-                        <span class="date">DAY6/7</span>
-                        <span class="til">四川航空3U8080</span>
-                      </div>
-                      <!---->
-                      <div class="timeBar">
-                        <div class="left">
-                          <a href="javascript:void(0)" class="time">22:10</a>
-                          <span class="text">甲米</span>
-                        </div>
-                        <div class="right">
-                          <a href="javascript:void(0)" class="time">02:35
-                            <!---->
-                            <!---->
-                          </a>
-                          <span class="text">成都</span>
-                        </div>
-                        <div class="mid"></div>
                         <div class="clear"></div>
                       </div>
                     </div>
@@ -281,7 +217,7 @@
               <!-- 酒店介绍信息 S -->
               <div class="hotel">
                 <div class="hotelHead">
-                  <div class="hotelName">厦门京闽中心酒店</div>
+                  <div class="hotelName">{{list.jiudian}}酒店</div>
                   <div class="hotelEName">Jingmin Central Hotel Xiamen</div>
                   <div class="hotelStar">
                     <div class="startList">
@@ -297,7 +233,8 @@
                 <div class="hotelDescList">
                   <div class="hotelDesc">
                     <div class="icon">
-                      <img src="../assets/img/S1.png"> 地址
+                      <img src="../assets/img/S1.png">
+                      地址{{list.dizhi}}
                     </div>
                     <div class="iconDesc">No.158 Yuhou Nan Li</div>
                   </div>
@@ -336,20 +273,17 @@
                     <div class="icon">
                       <img src="../assets/img/S3.png">简介
                     </div>
-                    <div
-                      class="iconDesc"
-                    >五星级厦门京闽中心酒店位于厦门的经济和娱乐中心，设有5间餐厅、1个Spa中心和1座室内温水游泳池。酒店距离高崎国际机场、鼓浪屿轮渡码头和中山路步行街有18分钟车程，距离厦门国际会议展览中心有20分钟车程，距离厦门北火车站有40分钟车程。
-                      <br>厦门京闽中心酒店典雅的客房拥有现代化的装饰和平面有线电视/卫星电视。所有客房都设有自动冲洗马桶座、迷你吧、私人保险箱和洗浴用品。
-                      <br>沧浪台提供传统的中式按摩和足部反射按摩理疗。客人可以在健身中心锻炼身体、打台球和乒乓或在桑拿设施内放松身心。酒店提供外币兑换服务。
-                      <br>雅博园西餐厅供应各种各样的西式菜肴和每日早餐。闽海阁中餐厅供应美的粤菜和闽菜。港湾吧美式酒吧、逸思轩大堂吧和樱花俱乐部供应饮品。
+                    <div class="iconDesc">
+                          {{list.jdjieshao}}
                     </div>
                   </div>
                 </div>
               </div>
               <!-- 酒店介绍信息 E -->
             </div>
-            <div class="more moreHotel">
-              <a href="#this">查看全部酒店</a>
+            <div class="more moreHotel" @click="showJd">
+              <p v-show="Jd">查看全部酒店</p>
+              <p v-show="!Jd">已经加载全部</p>
             </div>
           </div>
           <!---->
@@ -384,19 +318,62 @@
 export default {
   data() {
     return {
-      isfixed: false
+      // 是否置顶
+      isfixed: false,
+      list: {
+        id: this.$route.query.id,
+        logo: "",
+        title: "",
+        price: "",
+        liulanNum: "",
+        wangfeiji: "",
+        fanfeiji: "",
+        startDate: "",
+        endDate: "",
+        startDizhi: "",
+        endDizhi: "",
+        jiudian: "",
+        jiudianImg: "",
+        dizhi: "",
+        jdjieshao: ""
+      }, //列表
+      Jd:true,
     };
   },
-  
+  created() {
+    // 因模拟数据 暂时未加 id
+    let id = this.$route.query.id;
+    this.axios
+      .get(
+        "https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/tjlist",
+        this.list
+      )
+      .then(res => {
+        this.list.logo = res.data.category.logo;
+        this.list.title = res.data.category.title;
+        this.list.price = res.data.category.price;
+        this.list.liulanNum = res.data.category.liulanNum;
+        this.list.wangfeiji = res.data.category.wangfeiji;
+        this.list.fanfeiji = res.data.category.fanfeiji;
+        this.list.startDate = res.data.category.startDate;
+        this.list.endDate = res.data.category.endDate;
+        this.list.startDizhi = res.data.category.startDizhi;
+        this.list.endDizhi = res.data.category.endDizhi;
+        this.list.jiudian = res.data.category.jiudian;
+        this.list.jiudianImg = res.data.category.jiudianImg;
+        this.list.dizhi = res.data.category.dizhi;
+        this.list.jdjieshao = res.data.category.jdjieshao;
+      });
+  },
   methods: {
     // 点击回顶按钮 返回顶部
-     gotop: function () {  
-     setTimeout(()=>{
-       document.body.scrollTop = 0
-       document.documentElement.scrollTop = 0
-     },1000)
-    },
-     // 添加一个方法兼容
+    gotop: function() {
+      setTimeout(() => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }, 1000);
+    },
+    // 添加一个方法兼容
     handleScroll() {
       let scrollTop =
         window.pageYOffset ||
@@ -420,6 +397,10 @@ export default {
         this.isfixed = false;
         mainPart.style.paddingTop = "0px";
       }
+    },
+    // 查看更多的酒店
+    showJd(){
+       this.Jd = false;  
     }
   },
   // 滚动的监听事件
@@ -428,18 +409,19 @@ export default {
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll); // 销毁页面时清除
-  },
-  }
-  // 点击回顶按钮 返回顶部
-  window.onscroll = function() {
-  const scrollTop =  document.documentElement.scrollTop || document.body.scrollTop
-    const goTop= document.querySelector('.topButton')
-          if (scrollTop >200) {
-              goTop.style.display = 'block'
-          } else {
-              goTop.style.display = 'none'
-          }
-  };
+  }
+};
+// 点击回顶按钮 返回顶部
+window.onscroll = function() {
+  const scrollTop =
+    document.documentElement.scrollTop || document.body.scrollTop;
+  const goTop = document.querySelector(".topButton");
+  if (scrollTop > 200) {
+    goTop.style.display = "block";
+  } else {
+    goTop.style.display = "none";
+  }
+};
 </script>
 
 
@@ -589,6 +571,11 @@ body {
 
   .sold {
     padding-left: 1.3rem;
+  }
+
+  .browse {
+    float: right;
+    margin-top: -1.9rem;
   }
 
   .info .browse,
@@ -1173,7 +1160,7 @@ body {
     position: relative;
     margin-top: -5.6rem;
     padding-bottom: 2rem;
-    a {
+    p {
       text-decoration: none;
       color: #40c895;
       padding-right: 1.5rem;
