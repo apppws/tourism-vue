@@ -18,20 +18,11 @@
       </div>
       <div class="form-sub">
         <span>同行人数</span>
-        <input type="text" placeholder="同行人数">
-      </div>
-      <div class="form-sub">
-        <span>旅行意愿</span>
-        <input type="checkbox" value="0" id="formSub1">
-        <label for="formSub1">人文</label>
-        <input type="checkbox" value="0" id="formSub2">
-        <label for="formSub2">历史</label>
-        <input type="checkbox" value="0" id="formSub3">
-        <label for="formSub3">自然</label>
+        <input v-model="userNum" type="text" placeholder="同行人数" @change="getNum">
       </div>
       <div class="form-sub">
         <span>备注</span>
-        <textarea></textarea>
+        <textarea v-model="content" @change="getcontent"></textarea>
       </div>
       <div class="orders-btn">
         <router-link to="/guide">
@@ -81,14 +72,30 @@ export default {
         { label: "香港特别行政区", value: "香港特别行政区" },
         { label: "澳门特别行政区", value: "澳门特别行政区" }
       ],
+      // 市
       citys: [],
+      // 获取的省
       selectProv: "",
+      // 获取的市
       selectCity: "",
       demoDatetime1: new Date(2016, 11, 1, 12, 0, 0),
-      demoTime: "12:23"
+      demoTime: "12:23",
+      // 人数
+      userNum: "",
+      // 内容
+      content: ""
     };
   },
+  created() {
+    console.log(this.userNum);
+  },
   methods: {
+    getNum() {
+      localStorage.setItem('userNum',this.userNum)
+    },
+    getcontent() {
+      localStorage.setItem('content',this.content)
+    },
     /*二级联动选择地区*/
     getProv: function(prov) {
       // console.log(prov);
@@ -1626,6 +1633,7 @@ export default {
     getCity: function(city) {
       console.log(city);
       console.log(this.selectCity);
+      localStorage.setItem('city',this.selectCity);
     }
   },
   mounted: function() {},
