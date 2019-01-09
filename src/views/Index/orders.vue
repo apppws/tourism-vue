@@ -24,10 +24,10 @@
         <span>备注</span>
         <textarea v-model="content" @change="getcontent"></textarea>
       </div>
-      <div class="orders-btn">
-        <router-link to="/guide">
-          <button>下一步</button>
-        </router-link>
+      <div class="orders-btn" @click="Btn">
+        <!-- <router-link to="/guide"> -->
+        <button>下一步</button>
+        <!-- </router-link> -->
       </div>
     </section>
   </div>
@@ -91,10 +91,10 @@ export default {
   },
   methods: {
     getNum() {
-      localStorage.setItem('userNum',this.userNum)
+      localStorage.setItem("userNum", this.userNum);
     },
     getcontent() {
-      localStorage.setItem('content',this.content)
+      localStorage.setItem("content", this.content);
     },
     /*二级联动选择地区*/
     getProv: function(prov) {
@@ -1633,7 +1633,18 @@ export default {
     getCity: function(city) {
       console.log(city);
       console.log(this.selectCity);
-      localStorage.setItem('city',this.selectCity);
+      localStorage.setItem("city", this.selectCity);
+    },
+    Btn() {
+      if (this.selectCity != "") {
+        if (this.userNum != "") {
+          this.$router.push("/guide");
+        } else {
+          alert("多少人必须要确定哦！");
+        }
+      } else {
+        alert("前往的城市还没有确定呢哦！快去选择");
+      }
     }
   },
   mounted: function() {},
