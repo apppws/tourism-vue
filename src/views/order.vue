@@ -13,12 +13,11 @@
         <div class="container">
           <div class="order-title">基础信息</div>
           <div class="order-content">
-            <span>城市：兰州</span>
+            <span>城市：{{userInfo.city}}</span>
             <span>时间：2018.01.01</span>
-            <span>人数：2人</span>
+            <span>人数：{{userInfo.userNum}}人</span>
           </div>
-          <div class="order-wish">旅行愿景:</div>
-          <div class="order-remark">备注：</div>
+          <div class="order-remark">备注：{{userInfo.content}}</div>
         </div>
       </section>
       <!--导游信息-->
@@ -30,12 +29,12 @@
               <img src="../assets/img/avatar.jpg" alt>
             </div>
             <div class="guide-info">
-              <div class="guide-name">飞奔的蜗牛</div>
+              <div class="guide-name">{{info.username}}</div>
               <div class="guide-job">
-                <span>已接单：30</span>
+                <span>已接单：{{info.yijiedan}}</span>
                 <span>主要接单地：兰州</span>
               </div>
-              <div class="guide-intro">从事导游行业xx年，简介导游简介导游简介导游简介导游</div>
+              <div class="guide-intro">{{info.jieshao}}</div>
             </div>
           </div>
         </div>
@@ -44,7 +43,7 @@
       <section class="order-pay mb-10">
         <div class="container">
           <div class="order-title">行程费用</div>
-          <div class="float-right">200元</div>
+          <div class="float-right">{{money}}元</div>
         </div>
       </section>
       <!--支付方式-->
@@ -55,8 +54,38 @@
         </div>
       </section>
     </div>
-    <router-link to="/pay">
+    <router-link :to="{path:'pay',query:{money:money}}">
       <section class="bottom-btn">确认订单</section>
     </router-link>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      id:this.$route.query.id,
+      userInfo:{
+        content:'',
+        userNum:'',
+        city:''
+      },
+      info:"",
+      money:300,
+    }
+  },
+  created() {
+    // 取出localStorage 中保存的基本信息
+    this.userInfo.city = localStorage.getItem('city');
+    this.userInfo.userNum = localStorage.getItem('userNum');
+    this.userInfo.content = localStorage.getItem('content');
+    // 向导信息  如果有后台直接就用id获取  
+    /**
+     * 暂时模拟
+     *  */ 
+    this.axios.get("https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/guideInfo").then((res)=>{
+        this.info = res.data.data
+    })  
+    
+  },
+}
+</script>

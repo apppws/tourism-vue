@@ -7,8 +7,10 @@
       <span class="page-name">支付订单</span>
     </header>
     <section class="pay-header">
-      <div class="pay-time">支付剩余时间 &nbsp;12:00</div>
-      <div class="pay-price">￥200.00</div>
+      <div class="pay-time">支付剩余时间 &nbsp;
+        <span>{{minute}}:{{second}}</span>
+      </div>
+      <div class="pay-price">￥{{money}}.00</div>
       <div class="pay-num">订单编号：1991239391</div>
     </section>
     <div class="mb-bg"></div>
@@ -53,3 +55,61 @@
     </router-link>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      money: this.$route.query.money,
+      minutes: 12,
+      seconds: 0
+    };
+  },
+  mounted() {
+    // 挂载
+    this.timer();
+  },
+  methods: {
+    // 倒计时
+    num(n) {
+      return n < 10 ? "0" + n : "" + n;
+    },
+    timer() {
+      var _this = this;
+      var time = window.setInterval(function() {
+        if (_this.seconds === 0 && _this.minutes !== 0) {
+          _this.seconds = 59;
+          _this.minutes -= 1;
+        } else if (_this.minutes === 0 && _this.seconds === 0) {
+          _this.seconds = 0;
+          window.clearInterval(time);
+        } else {
+          _this.seconds -= 1;
+        }
+      }, 1000);
+    },
+    goBack() {
+      this.$router.back(); //返回上一页
+    }
+  },
+  watch: {
+    second: {
+      handler(newVal) {
+        this.num(newVal);
+      }
+    },
+    minute: {
+      handler(newVal) {
+        this.num(newVal);
+      }
+    }
+  },
+  computed: {
+    second: function() {
+      return this.num(this.seconds);
+    },
+    minute: function() {
+      return this.num(this.minutes);
+    }
+  }
+};
+</script>

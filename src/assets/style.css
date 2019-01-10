@@ -1921,9 +1921,10 @@ ol, ul {
 /*支付订单*/
 
 .pay-header {
-    height: 11.6rem;
+    height: 7.6rem;
     padding-top: 1.44rem;
     text-align: center;
+    margin-top: 40px;
 }
 
 .pay-time, .pay-num {
