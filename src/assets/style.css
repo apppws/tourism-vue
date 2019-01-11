@@ -1850,7 +1850,7 @@ ol, ul {
 }
 
 #ticketUsed .ticket {
-    background-image: url(/img/timg.674475b9.png);
+    background-image: url('./img/timg.png');
     background-size: 18% auto;
     background-repeat: no-repeat;
     background-position: right;
@@ -1862,7 +1862,6 @@ ol, ul {
     background-repeat: no-repeat;
     background-position: right;
 }
-
 .ticket {
     position: relative;
     width: 21.8rem;

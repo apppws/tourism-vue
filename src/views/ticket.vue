@@ -19,44 +19,50 @@
     </section>
     <div class="mb-bg"></div>
     <section v-show="is_show==1" class="ticket-box" id="ticketNew">
-      <div class="ticket">
-        <div class="ticket-price">
-          ￥
-          <span>20</span>
+      <div v-if="jilu==1">
+        <div class="ticket" v-for="(v,k) in ticket" :key="k">
+          <div class="ticket-price">
+            ￥
+            <span>{{v.price}}</span>
+          </div>
+          <div class="ticket-info">{{v.content}}</div>
+          <div class="ticket-btn">
+            <button>立即使用</button>
+          </div>
         </div>
-        <div class="ticket-info">优惠券信息</div>
-        <div class="ticket-btn">
-          <button>立即使用</button>
-        </div>
+      </div>
+      <div v-else>
+        <span>暂无数据...</span>
       </div>
     </section>
     <section v-show="is_show==2" class="ticket-box" id="ticketLog">
-      <div class="ticket">
-        <div class="ticket-price">
-          ￥
-          <span>20</span>
+      <div v-if="jilu==2">
+        <div class="ticket" v-for="(v,k) in ticket" :key="k">
+          <div class="ticket-price">
+            ￥
+            <span>{{v.price}}</span>
+          </div>
+          <div class="ticket-info">优惠券信息</div>
+          <div class="ticket-btn"></div>
         </div>
-        <div class="ticket-info">优惠券信息</div>
-        <div class="ticket-btn"></div>
+      </div>
+      <div v-else>
+        <span>暂无数据...</span>
       </div>
     </section>
     <section v-show="is_show==3" class="ticket-box" id="ticketUsed">
-      <div class="ticket">
-        <div class="ticket-price">
-          ￥
-          <span>250</span>
-        </div>
-        <div class="ticket-info">满250减250</div>
-        <div class="ticket-btn"></div>
+      <div v-if="jilu==3">
+        <div class="ticket" v-for="(v,k) in ticket" :key="k">
+          <div class="ticket-price">
+            ￥
+            <span>{{v.price}}</span>
+          </div>
+          <div class="ticket-info">{{v.content}}</div>
+          <div class="ticket-btn"></div>
+        </div>&nbsp;
       </div>
-      &nbsp;
-      <div class="ticket">
-        <div class="ticket-price">
-          ￥
-          <span>30</span>
-        </div>
-        <div class="ticket-info">满5000减30</div>
-        <div class="ticket-btn"></div>
+      <div v-else>
+        <span>暂无数据...</span>
       </div>
     </section>
   </div>
@@ -78,7 +84,9 @@ export default {
         {
           content: "已过期"
         }
-      ]
+      ],
+      ticket: [],
+      jilu: ""
     };
   },
   methods: {
@@ -92,6 +100,18 @@ export default {
       }
       this.$set(this.active, 3, 0);
     }
+  },
+  created() {
+    this.axios
+      .get(
+        "https://www.easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/ticket"
+      )
+      .then(res => {
+        this.ticket = res.data.data;
+        for (let i = 0; i < this.ticket.length; i++) {
+          this.jilu = this.ticket[i].jilu;
+        }
+      });
   }
 };
 </script>
