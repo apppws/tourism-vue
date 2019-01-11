@@ -51,7 +51,7 @@
       </div>
     </section>
     <router-link to="/paySuccess">
-      <section class="bottom-btn">确认支付&nbsp;&nbsp;&nbsp;￥200.00</section>
+      <section class="bottom-btn">确认支付&nbsp;&nbsp;&nbsp;￥{{money}}.00</section>
     </router-link>
   </div>
 </template>

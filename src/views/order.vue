@@ -26,7 +26,7 @@
           <div class="order-title">向导信息</div>
           <div class="guide-info-wrap">
             <div class="guide-pic">
-              <img src="../assets/img/avatar.jpg" alt>
+              <img :src="info.headImg" alt>
             </div>
             <div class="guide-info">
               <div class="guide-name">{{info.username}}</div>
@@ -89,3 +89,15 @@ export default {
   },
 }
 </script>
+<style scoped>
+.page-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 2.95rem;
+  line-height: 2.95rem;
+  background-color: #fff;
+  border-bottom: 1px solid #f0ebeb;
+  z-index: 999;
+}
+</style>

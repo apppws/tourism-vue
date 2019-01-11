@@ -24,12 +24,6 @@
     </section>
   </div>
 </template>
-<style socped>
-.user-agreement .xieyi {
-  font-size: 16px;
-  color: brown;
-}
-</style>
 <script>
 import { Dialog, Toast } from "we-vue";
 export default {
@@ -41,7 +35,7 @@ export default {
       // 时间倒计时
       sendAuthCode: true,
       /*倒计时 计数器*/
-      auth_time: 0,
+      auth_time: 0
     };
   },
   methods: {
@@ -63,10 +57,16 @@ export default {
         username: this.username,
         password: this.password
       };
-      this.axios.post("https://easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/members",options)
-        .then((res)=>{
-            // console.log(res);
-            if (res.status == "200") {
+      this.axios
+        .post(
+          "https://easy-mock.com/mock/5c3305b6c0a7f916f9116d93/tour/members",
+          options
+        )
+        .then(res => {
+          // console.log(res);
+          if (res.status == "200") {
+            localStorage.setItem('username',this.username)
+            localStorage.setItem('password',this.password)   //暂时模拟  
             Dialog({
               message: "注册成功",
               skin: "android"
@@ -79,9 +79,15 @@ export default {
               message: "注册账号或者密码不正确"
             });
           }
-        })
+        });
     }
-    }
-  };
+  }
+};
 </script>
 
+<style socped>
+.user-agreement .xieyi {
+  font-size: 16px;
+  color: brown;
+}
+</style>

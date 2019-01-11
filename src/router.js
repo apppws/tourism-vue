@@ -34,6 +34,10 @@ export default new Router({
         {
           path:'/home',
           name:'home',
+          meta:{
+            title:'个人',
+            isLogin:true
+          },
           component:() =>import('./views/Index/home.vue')
         }
       ]

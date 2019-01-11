@@ -2,6 +2,7 @@
 
 .body {
     margin-bottom: 40px;
+    overflow-y: scroll;
 }
 
 .font-28 {
@@ -870,7 +871,7 @@ ol, ul {
 /*聊天*/
 
 .chat-wrap {
-    min-height: 11rem;
+    min-height: 30rem;
     padding: 5.16rem 0.6rem 9rem;
 }
 
