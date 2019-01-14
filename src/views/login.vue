@@ -65,3 +65,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .logon-header img {
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    left: 33%;
+    top: 6%;
+}
+</style>
+

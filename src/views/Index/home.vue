@@ -5,7 +5,7 @@
       <div class="home-avatar">
         <img src="../../assets/img/avatar.jpg" alt>
       </div>
-      <div class="home-name">用户名</div>
+      <div class="home-name">{{username}}</div>
       <div class="home-btn">
         <router-link to="/info">编辑资料</router-link>
       </div>
@@ -63,6 +63,9 @@ export default {
     return {
       username:'',
     }
+  },
+  created() {
+    this.username = localStorage.getItem('username');
   },
 }
 </script>

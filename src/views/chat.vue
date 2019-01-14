@@ -1,72 +1,148 @@
 <template>
   <div>
-    <div class="wrap">
+    <div id="chatroom">
       <header class="page-header">
         <router-link to="/chatroom" class="page-return">
           <img src="../assets/img/return.png" alt class="return">
         </router-link>
-        <span class="page-name">奔跑的蜗牛</span>
+        <span class="page-name">用户({{clientNum}})</span>
       </header>
-      <div class="chat-wrap">
-        <div class="chat-time">2月24日 20:50</div>
-        <div class="chat-other chat-sub">
-          <div class="guide-pic-sm">
-            <img src="../assets/img/avatar.jpg" alt>
+      <div class="body">
+        <div v-for="(item,index) in msgs" :key="index">
+          <div v-if="item.msgType=='online'" class="onlineMsg">
+            <div class="sysTime">{{item.time}}</div>
+            <div class="online">{{item.username}}上线</div>
           </div>
-          <div class="chat-other-content">
-            <div class="triangle"></div>
-            <div class="chat-content-div">你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</div>
-            <div class="chat-content-div">你好你好你好你好</div>
-            <div class="chat-content-div">你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</div>
+          <div v-else-if="item.msgType=='offline'" class="offlineMsg">
+            <div class="sysTime">{{item.time}}</div>
+            <div class="online">{{item.username}}下线</div>
+          </div>
+          <div v-else-if="item.msgType=='clientMsg'" class="clientMsg">
+            <div class="sysTime">{{item.time}}</div>
+            <div v-if="item.username==$route.query.username" class="self">
+              <div class="bubble">
+                <div class="chatBubble">{{item.msg}}</div>
+                <div class="triangle"></div>
+              </div>
+              <div class="user">{{item.username}}</div>
+            </div>
+            <div v-else class="others">
+              <div class="user">{{item.username}}</div>
+              <div class="bubble">
+                <div class="chatBubble">{{item.msg}}</div>
+                <div class="triangle"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="chat-me chat-sub">
-          <div class="chat-me-content">
-            <div class="triangle"></div>
-            <div class="chat-content-div">你好你好你好你好</div>
-          </div>
-          <div class="guide-pic-sm">
-            <img src="../assets/img/avatar.jpg" alt>
-          </div>
+      </div>
+      <div class="footer">
+        <div class="msgInput">
+          <input
+            v-model="msg"
+            autofocus
+            class="input"
+            type="text"
+            @keydown.enter="send(msg)"
+            placeholder="摁回车即可发送"
+          >
         </div>
       </div>
     </div>
-
-    <section class="chat-input-box">
-      <div class="chat-voice">
-        <img src="../assets/img/chat_voice.png" alt>
-      </div>
-      <input type="text" class="chat-input">
-      <div class="chat-icon">
-        <a v-show="send" @click.prevent="send">发送</a>
-        <img v-show="!send" src="../assets/img/chat_icon.png" alt>
-      </div>
-      <div class="chat-add">
-        <img src="../assets/img/chat_add.png" alt>
-      </div>
-    </section>
   </div>
 </template>
+
 <script>
+var moment = require("moment");
+import storage from "../../server/storage";
+import io from 'socket.io-client';
 export default {
-  // this.socketApi.sendSock(agentData,this.getConfigResult);   【agentData：发送的参数；this.getConfigResult：回调方法】
+  name: "chatRoom",
   data() {
     return {
-      id: this.$route.query.id,
-      send: true,
-      datas: "你好啊",
-      getConfigResult: "好的"
+      socket: null,
+      msg: "",
+      msgs: storage.fetch(),
+      clientNum: 0,
+      showEmoji: false,
+      emoji: []
     };
   },
+  mounted: function() {
+    this.socket = io.connect("http://localhost:9999");
+    if (this.$route.query.username) {
+      this.socket.emit("online", this.$route.query.username);
+    } else {
+      alert("Login First");
+      this.$router.push("/");
+    }
+    this.socket.on("online", data => {
+      this.msgs.push({
+        msgType: "online",
+        username: data,
+        time: moment().format("HH:mm:ss")
+      });
+      storage.save(this.msgs);
+    });
+    this.socket.on("broadcastMsg", data => {
+      this.msgs.push({
+        msgType: "clientMsg",
+        username: data.username,
+        msg: data.msg,
+        time: moment().format("HH:mm:ss")
+      });
+      storage.save(this.msgs);
+    });
+    this.socket.on("offline", data => {
+      this.msgs.push({
+        msgType: "offline",
+        username: data,
+        time: moment().format("HH:mm:ss")
+      });
+      storage.save(this.msgs);
+    });
+    this.socket.on("clientNum", num => {
+      this.clientNum = num;
+    });
+  },
+  updated: function() {
+    this.$nextTick(function() {
+      var oBody = document.querySelector(".body");
+      oBody.scrollTop = oBody.scrollHeight;
+    });
+  },
   methods: {
-    send() {
-      this.socketApi.sendSock(this.datas, this.getConfigResult);
-      console.log(this.datas, this.getConfigResult);
+    send: function(data) {
+      var transdata = {
+        msg: data,
+        username: this.$route.query.username
+      };
+      if (data) {
+        this.socket.emit("msg", transdata);
+        this.msg = "";
+      } else {
+        alert("消息为空！");
+      }
     }
   }
 };
 </script>
+
 <style scoped>
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: brown;
+}
+.chatroom {
+  width: 400px;
+  height: 600px;
+  position: relative;
+  border: 1px solid #999;
+  margin: 0 auto;
+  margin-top: 15px;
+}
 .page-header {
   position: fixed;
   top: 0;
@@ -76,5 +152,158 @@ export default {
   background-color: #fff;
   border-bottom: 1px solid #f0ebeb;
   z-index: 999;
+}
+.header {
+  background-color: rgb(112, 114, 175);
+  height: 50px;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.body {
+  height: 505px;
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+}
+.iconfont {
+  font-size: 24px;
+}
+.logout,
+.about {
+  padding: 7px;
+}
+.sysTime {
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+.onlineMsg,
+.offlineMsg,
+.clientMsg {
+  margin-bottom: 10px;
+  height: 50px;
+  width: 100%;
+}
+.clientMsg {
+  position: relative;
+}
+.online,
+.offline {
+  display: inline-block;
+  height: 23px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
+  color: #999;
+  text-align: center;
+  line-height: 23px;
+  background-color: rgb(209, 209, 209);
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.self {
+  position: absolute;
+  right: 14px;
+}
+.others {
+  position: absolute;
+  left: 14px;
+}
+.bubble {
+  display: inline-block;
+  position: relative;
+}
+.chatBubble {
+  height: 30px;
+  line-height: 30px;
+  background-color: rgb(198, 205, 243);
+  font-size: 16px;
+  color: rgb(58, 58, 58);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.self .triangle {
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  border-left: 10px solid rgb(198, 205, 243);
+  border-bottom: 10px solid transparent;
+}
+.others .triangle {
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border-right: 10px solid rgb(198, 205, 243);
+  border-bottom: 10px solid transparent;
+}
+.self .user {
+  display: inline-block;
+  margin-left: 10px;
+}
+.others .user {
+  display: inline-block;
+  margin-right: 10px;
+}
+.footer {
+  height: 45px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: -webkit-flex;
+  display: flex;
+}
+.emoji {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.emojiList {
+  display: inline;
+  /* width: 400px;
+  height: 145px; */
+  position: absolute;
+  bottom: 30px;
+  border: 1px solid #ccc;
+  background-color: rgb(244, 248, 250);
+  box-sizing: border-box;
+  padding: 0px;
+}
+.emojiList li {
+  display: inline-block;
+  margin: 0;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+}
+.emojiList li:hover {
+  border: 1px solid #ccc;
+}
+.msgInput {
+  position: relative;
+  width: 100%;
+  height: 45px;
+}
+.msgInput .input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 45px;
+  border: 1px solid #eee;
+  padding-left: 50px;
+  background-color: #b4e8e0;
+  font-size: 18px;
+  caret-color: rgb(62, 141, 231);
+  color: rgb(55, 125, 182);
 }
 </style>

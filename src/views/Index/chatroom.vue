@@ -5,7 +5,7 @@
     </header>
     <section class="min-height chat-list">
       <div v-for="(v,k) in userList" :key="k">
-        <router-link :to="{path:'chat',query:{id:v.id}}">
+        <router-link :to="{path:'chat',query:{username:v.name}}">
           <div class="chat-list-sub">
             <div class="guide-pic-sm">
               <img :src="v.headImg" alt>

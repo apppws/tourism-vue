@@ -127,7 +127,7 @@
           <a href="order-begin.html">
             <div class="trip-content-box">
               <div class="trip-avatar">
-                <img src="../assets/img/avatar.jpg" alt>
+                <img :src="v.img" alt>
               </div>
               <div class="trip-content">
                 <div class="trip-text">城市：{{v.city}}</div>
@@ -135,7 +135,7 @@
                 <div class="trip-text">人数：2人</div>
               </div>
               <div class="float-right trip-right">
-                <img :src="v.img" alt>
+                <img src="../assets/img/select.png" alt>
               </div>
             </div>
           </a>

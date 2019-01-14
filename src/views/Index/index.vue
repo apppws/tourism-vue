@@ -97,9 +97,9 @@
       <section class="raider-wrap">
         <div class="ui-section-head">
           <span class="ui-section-title">游记与话题</span>
-          <a href="//m.qyer.com/bbs/" data-bn-igp="mindex-thread_group-all" class="ui-section-more">
+          <!-- <a href="//m.qyer.com/bbs/" data-bn-igp="mindex-thread_group-all" class="ui-section-more">
             <span>更多</span>
-          </a>
+          </a> -->
         </div>
         <div class="raider-box">
           <router-link :to="{path:'tourlist',query:{id:tourblogsId}}">
